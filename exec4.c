@@ -11,10 +11,9 @@ int main()
 
     maior = n1;
     if (n1 < n2)
-    {
         maior = n2;
-    }
-    printf("Maior numero: %.3f:", maior);
+
+    printf("Maior numero: %.1f:", maior);
 
     return 0;
 }
