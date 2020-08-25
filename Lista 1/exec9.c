@@ -7,7 +7,7 @@ int main()
     prazo = 0;
     vista = 0;
 
-    printf("Exercicio 8\n");
+    printf("Exercicio 9\n");
 
     for (int i = 0; i < 20; i++)
     {

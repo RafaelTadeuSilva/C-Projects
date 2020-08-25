@@ -4,7 +4,7 @@
 int main()
 {
     float a, b, c, delta, x1, x2;
-    printf("Exercicio 6\n");
+    printf("Exercicio 7\n");
 
     printf("Equacao do segundo grau\n");
 
