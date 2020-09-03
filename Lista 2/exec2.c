@@ -51,6 +51,13 @@ int main()
 
     for (int i = 1; i <= qtParc; i++)
     {
+        mes++;
+        if (mes > 12)
+        {
+            mes = 1;
+            ano++;
+        }
+
         if (mes == 2 && (ano%4 > 0 && dia > 28))
         {
             printf("Parcela %d: %d/%d/%d\n", i, 28, mes, ano);
@@ -66,13 +73,6 @@ int main()
         else
         {
             printf("Parcela %d: %Fd/%d/%d\n", i, dia, mes, ano);
-        }
-
-        mes++;
-        if (mes > 12)
-        {
-            mes = 1;
-            ano++;
         }
     }
 

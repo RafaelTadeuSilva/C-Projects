@@ -3,7 +3,7 @@
 
 int main()
 {
-    char str1[30], str2[30] = {' '};
+    char str1[30], str2[30];
 
     printf("Digite a primeira palavra: ");
     scanf("%s", str1);

@@ -16,7 +16,7 @@ int main()
             iniciais[strlen(iniciais)] = nome[i + 1];
     }
 
-    printf("%s", iniciais);
+    printf("As iniciais sao: %s", iniciais);
 
     return 0;
 }

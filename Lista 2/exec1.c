@@ -3,7 +3,7 @@
 
 int main()
 {
-    char palavra[31] = {' '};
+    char palavra[31];
 
     printf("Digite uma palavra: ");
     scanf("%s", palavra);

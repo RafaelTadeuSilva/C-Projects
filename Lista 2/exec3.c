@@ -25,7 +25,7 @@ int main()
         if (dig > 9)
         {
             dig = 0;
-            printf("digito calculado > 9, entao digito sera 0");
+            printf("digito calculado > 9\n");
         }
         printf("Digito = %d", dig);
     }

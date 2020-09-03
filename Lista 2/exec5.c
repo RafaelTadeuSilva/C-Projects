@@ -3,7 +3,7 @@
 
 int main()
 {
-    char palavra[30] = {' '};
+    char palavra[31];
     int vogais = 0;
 
     printf("Digite uma palavra: ");
@@ -11,7 +11,8 @@ int main()
     
     for (int i = 0; i < strlen(palavra); i++)
     {
-        if (palavra[i] == 'a' || palavra[i] == 'e' || palavra[i] == 'i' || palavra[i] == 'o' || palavra[i] == 'u')
+        if (palavra[i] == 'a' || palavra[i] == 'e' || palavra[i] == 'i' || palavra[i] == 'o' || palavra[i] == 'u'
+        || palavra[i] == 'A' || palavra[i] == 'E' || palavra[i] == 'I' || palavra[i] == 'O' || palavra[i] == 'U')
             vogais++;
     }
     

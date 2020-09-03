@@ -2,8 +2,9 @@
 #include<string.h>
 
 int main(){
-    char str1[31], str2[31] = {' '};
+    char str1[31], str2[31];
     int j = 0;
+    printf("Digite uma palavra: ");
 
     scanf("%s", str1);
     
@@ -12,7 +13,7 @@ int main(){
         str2[j++] = str1[i];
     }
 
-    if(strcmp(str1, str2) == 0)
+    if(strcasecmp(str1, str2) == 0)
         printf("A palavra %s e um palindromo.", str1);
     else
         printf("A palavra %s nao e um palindromo.", str1);
