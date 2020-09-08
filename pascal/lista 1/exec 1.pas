@@ -8,20 +8,41 @@ Begin
 	rodada := 1;
 	while num <= 25 do
 	begin
+		//para a direita
 		mat[i, j] := num;
 		num := num + 1;
 		j := j + 1;
+		
+
 		if(j = 6 - rodada) then
 		begin
-			while i < 6 do
-			begin
+			//para baixo
+			while i < 7 - rodada do
+			begin 
 				mat[i, j] := num;	
 				num := num + 1;
 				i := i+1;
 			end;
+			i := i-1;
+			
+			//para a esquerda
+			while j > rodada do
+			begin
+				j := j-1;
+				mat[i, j] := num;	
+				num := num + 1;
+			end;
+			// para cima 
+			while i > rodada + 1 do
+			begin
+				i := i-1;
+				mat[i, j] := num;	
+				num := num + 1;
+				
+			end;
 		  rodada := rodada + 1;
-			i := rodada;
-			j := 1;
+			i := rodada; 
+			j := rodada;
 		end;
 	end;
 			 

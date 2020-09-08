@@ -1,27 +1,29 @@
-Program Pzim ;
+DProgram Pzim ;
 var mat : array [1..5, 1..5] of integer;
-i, j, num, rodada : integer;
+i, j, num, diag : integer;
 Begin
 	i := 1;
 	j := 1;
 	num := 1;
-	rodada := 1;
-	while num <= 25 do
+	diag := 1;
+	while num <= 15 do
 	begin
-		mat[i, j] := num;
+		if diag = 1 then
+			mat[i, j] := num
+		else
+		begin
+		  mat[i, j] := num;
+		  mat[j, i] := num;
+		end;
+		
 		num := num + 1;
 		j := j + 1;
-		if(j = 6 - rodada) then
+		i := i + 1;
+		if(j = 6) then
 		begin
-			while i < 6 do
-			begin
-				mat[i, j] := num;	
-				num := num + 1;
-				i := i+1;
-			end;
-		  rodada := rodada + 1;
-			i := rodada;
-			j := 1;
+			diag := diag + 1;
+			i:= 1;
+			j:= diag;
 		end;
 	end;
 			 
