@@ -1,5 +1,5 @@
 Program Pzim ;
-const N = 10;
+const N = 5;
 var mat : array [1..N, 1..N] of integer;
 i, j, num, diag : integer;
 Begin
