@@ -22,7 +22,7 @@ int main(){
             return 0;
         }
     }
-    printf("NÃO ACHEI");
+    printf("NAO ACHEI");
 
     return 0;
 }

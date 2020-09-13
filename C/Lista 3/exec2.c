@@ -23,7 +23,7 @@ int main(){
     if(encontrou == 1)
         printf("ACHEI");
     else
-        printf("NÃO ACHEI");
+        printf("NAO ACHEI");
 
     return 0;
 }
