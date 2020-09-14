@@ -11,18 +11,19 @@ int main(){
         printf("Digite um nome de pessoa: ");
         gets(nomes[i]);
     }
-    
     printf("\nDigite um nome para procurar: ");
     gets(busca);
-    
     for (int i = 0; i < 10; i++)
     {
         if(stricmp(busca, nomes[i])==0){
-            printf("ACHEI");
-            return 0;
+            encontrou = 1;
+            break;
         }
     }
-    printf("NAO ACHEI");
+    if(encontrou == 1)
+        printf("ACHEI");
+    else
+        printf("NAO ACHEI");
 
     return 0;
 }

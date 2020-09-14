@@ -51,7 +51,7 @@ int main()
         }
         else
         {
-            printf("\nOpção digitada é inválida!\n");
+            printf("\nOpcao digitada e invalida!\n\n");
         }
     }
 

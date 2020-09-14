@@ -15,7 +15,7 @@ int main(){
             menorElemento = i;
     }
     
-    printf("\nO Menor Elemento esta na posicao %d e com valor de: %.2f\n", menorElemento, num[menorElemento]);
+    printf("\nO Menor Elemento esta na posicao %d com valor: %.2f\n", menorElemento, num[menorElemento]);
     printf("\nMedia: %.2f\n", media/10);
     
     return 0;

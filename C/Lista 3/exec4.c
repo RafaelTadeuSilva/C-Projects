@@ -1,44 +1,65 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
+#include <ctype.h>
 
 int main()
 {
     char nome[21] = {' '};
     char consoantes[21] = {' '};
+    int qtdeCons[20] = {0};
     char vogais[] = "aeiou ";
-    int ehVogal;
-
-    gets(nome);
-
-    int qtdeCons = 0;
+    bool ehVogal;
+    int contCons = 0;
 
     printf("Digite uma palavra: ");
 
+    gets(nome);
+
     for (int i = 0; i < strlen(nome); i++)
     {
-        ehVogal = 0;
+        ehVogal = false;
 
         for (int j = 0; j < strlen(vogais); j++)
         {
-            if (nome[i] == vogais[j])
+            if (tolower(nome[i]) == tolower(vogais[j]))
             {
-                ehVogal = 1;
+                ehVogal = true;
                 break;
             }
         }
 
-        if (ehVogal == 0)
+        if (ehVogal == false)
         {
-            consoantes[qtdeCons] = nome[i];
-            qtdeCons++;
+            bool encontrou = false;
+            for (int l = 0; l < strlen(consoantes); l++)
+            {
+                if(consoantes[l]==tolower(nome[i])){
+                    qtdeCons[l]++;
+                    encontrou = true;
+                    break;
+                }
+            }
+            if(encontrou == false){
+                qtdeCons[strlen(consoantes)]++;
+                consoantes[strlen(consoantes)] = tolower(nome[i]);
+            }
+            contCons++;
         }
     }
-    if (qtdeCons == 0)
-        printf("Não foi digitada nenhuma consoante.");
-    else if (qtdeCons == 1)
-        printf("Foi lida %d consoante, sendo ela: %s", qtdeCons, consoantes);
+    if (contCons == 0)
+        printf("Nao foi digitada nenhuma consoante.");
+    else if (contCons == 1)
+        printf("Foi lida %d consoante, sendo ela: %s", contCons, consoantes);
     else
-        printf("Foram lidas %d consoantes, sendo elas: %s", qtdeCons, consoantes);
+    {
+        printf("Foram lidas %d consoantes, sendo elas:\n", contCons);
+
+        for (int i = 1; i < strlen(consoantes); i++)
+        {
+            printf("%c: %d\n", consoantes[i], qtdeCons[i]);
+        }
+    }   
 
     return 0;
 }
