@@ -1,33 +1,39 @@
 Program Pzim ;
-var mat : array [1..5, 1..5] of integer;
-i, j, num, rodada : integer;
+const N = 5;
+var mat : array [1..N, 1..N] of integer;
+i, j, num, volta : integer;
 Begin
 	i := 1;
 	j := 1;
-	num := 1;
-	rodada := 1;
-	while num <= 25 do
+	num := 0;
+	volta := 1;
+	while volta <= N do
 	begin
-		mat[i, j] := num;
-		num := num + 1;
-		j := j + 1;
-		if(j = 6 - rodada) then
+	
+		//para a direita
+		for j:=j to N+1 - volta do
 		begin
-			while i < 6 do
-			begin
-				mat[i, j] := num;	
-				num := num + 1;
-				i := i+1;
-			end;
-		  rodada := rodada + 1;
-			i := rodada;
-			j := 1;
+			num := num + 1;
+			mat[i, j] := num;
 		end;
+
+		//para baixo
+		for i:=i+1 to N do
+		begin
+			num := num + 1;
+			mat[i, j] := num
+		end;		  
+		
+		//próxima volta
+		volta := volta + 1;
+		i := volta;
+		j := 1;
+
 	end;
-			 
-	for i := 1 to 5 do
+			   
+	for i := 1 to N do
 	begin
-		for j := 1 to 5 do
+		for j := 1 to N do
 		begin
 			write(mat[i,j], '	');
 		end;
