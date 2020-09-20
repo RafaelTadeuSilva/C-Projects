@@ -1,19 +1,19 @@
 #include <stdio.h>
-
+#include <string.h>
 int main()
 {
     int opcao;
-    int totalJogos = 0;
+    float totalJogos = 0;
     int jogadaX = 0;
     int jogadaY = 0;
-    int empate = 0;
-    int vitX = 0;
-    int vitO = 0;
+    float empate = 0;
+    float vitX = 0;
+    float vitO = 0;
 
     do
     {
         printf("Menu\n1 - Novo Jogo\n2 - Imprimir Ranking\n3 - Imprimir estatísticas\n0 - Para Finalizar\n\n");
-        printf("Digite a opcao desejada ->");
+        printf("Digite a opcao desejada -> ");
         scanf("%d", &opcao);
 
         switch (opcao)
@@ -26,6 +26,7 @@ int main()
             int erro;
             char jogadorAtual = 'X';
             int jogadas = 0;
+            totalJogos++;
             do
             {
                 printf("Jogo Atual:\n\n");
@@ -49,7 +50,9 @@ int main()
                     printf("digite a coluna (0-2):");
                     scanf("%d", &jogadaY);
                     if (mat[jogadaX][jogadaY] == ' ') //Verifica se já esta preenchida
+                    {
                         mat[jogadaX][jogadaY] = jogadorAtual;
+                    }
                     else
                     {
                         erro = 1;
@@ -59,31 +62,61 @@ int main()
                 jogadas++;
                 /* verifica vitória */
                 vitoria = 1;
-                for (int i = 0; i < 2; i++) //Verifica linha ultima jogada
+                for (int i = 0; i < 3; i++) //Verifica linha ultima jogada
                 {
-                    printf(vitoria);
-                    printf("%mat[jogadaX, i]);
-                    if(mat[jogadaX, i] != jogadorAtual)
+                    if (jogadorAtual != mat[jogadaX][i])
                     {
                         vitoria = 0;
                         break;
                     }
                 }
-                if(vitoria != 1){
+
+                if (vitoria != 1)
+                {
                     vitoria = 1;
-                    for (int j = 0; j < 2; j++) //Verifica coluna ultima jogada
+                    for (int j = 0; j < 3; j++) //Verifica coluna ultima jogada
                     {
-                        if(mat[j, jogadaY] != jogadorAtual)
+                        if (mat[j][jogadaY] != jogadorAtual)
                         {
                             vitoria = 0;
                             break;
                         }
                     }
                 }
-                
+                if (vitoria != 1)
+                {
+                    vitoria = 1;
+                    for (int i = 0; i < 3; i++) //Verifica coluna ultima jogada
+                    {
+                        if (mat[i][i] != jogadorAtual)
+                        {
+                            vitoria = 0;
+                            break;
+                        }
+                    }
+                }
+                if (vitoria != 1)
+                {
+                    vitoria = 1;
+                    for (int i = 0; i < 3; i++) //Verifica coluna ultima jogada
+                    {
+                        if (mat[i][2-i] != jogadorAtual)
+                        {
+                            vitoria = 0;
+                            break;
+                        }
+                    }
+                }
+
                 if (vitoria == 1)
                 {
-                    printf("Vitoria do Jogador %c.", jogadorAtual);
+                    printf("\nVitoria do Jogador %c!\n", jogadorAtual);
+                    system("pause");
+                    system("cls");
+                    if (jogadorAtual == 'X')
+                        vitX++;
+                    else
+                        vitO++;
                 }
                 else
                 {
@@ -94,10 +127,36 @@ int main()
 
             break;
         case 2:
-            /* imprimir ranking */
+            system("cls");
+            printf("Ranking Atual:\n\n");
+
+            if (totalJogos == 0)
+                printf("Nenhuma partida foi realizada!\n\n");
+            else
+            {
+                printf("Jogos realizados: %0.f\n", totalJogos);
+                printf("Vitorias de X: %0.f\n", vitX);
+                printf("Vitorias de O: %0.f\n", vitO);
+                printf("Empates: %0.f\n", empate);
+            }
+            system("pause");
+            system("cls");
             break;
         case 3:
-            /* estatisticas numero jogos - vencedor x vencedor o, empate */
+            system("cls");
+            printf("Estatisticas Atuais:\n\n");
+
+            if (totalJogos == 0)
+                printf("Nenhuma partida foi realizada!\n\n");
+            else
+            {
+                printf("Jogos realizados: %0.f\n", totalJogos);
+                printf("Vitorias de X: %0.2f%%\n", vitX/totalJogos*100);
+                printf("Vitorias de O: %0.2f%%\n", vitO/totalJogos*100);
+                printf("Empates: %0.2f%%\n", empate/totalJogos*100);
+            }
+            system("pause");
+            system("cls");
             break;
         case 0:
             printf("\n\nFim da Execucao.");
