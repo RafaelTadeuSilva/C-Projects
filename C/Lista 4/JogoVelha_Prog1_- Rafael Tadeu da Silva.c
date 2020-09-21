@@ -61,52 +61,31 @@ int main()
                 } while (erro == 1);
                 jogadas++;
                 /* verifica vitória */
-                vitoria = 1;
-                for (int i = 0; i < 3; i++) //Verifica linha ultima jogada
+                int vitlinha = 1;
+                int vitcoluna = 1;
+                int vitdiag1 = 1;
+                int vitdiag2 = 1;
+
+                for (int i = 0; i < 3; i++)
                 {
-                    if (jogadorAtual != mat[jogadaX][i])
+                    if (jogadorAtual != mat[jogadaX][i]) //Verifica linha ultima jogada
                     {
-                        vitoria = 0;
-                        break;
+                        vitlinha = 0;
+                    }
+                    if (mat[i][jogadaY] != jogadorAtual) //Verifica coluna ultima jogada
+                    {
+                        vitcoluna = 0;
+                    }
+                    if (mat[i][i] != jogadorAtual) //Verifica diagonal 1
+                    {
+                        vitdiag1 = 0;
+                    }
+                    if (mat[i][2 - i] != jogadorAtual) //Verifica diagonal 1
+                    {
+                        vitdiag2 = 0;
                     }
                 }
 
-                if (vitoria != 1)
-                {
-                    vitoria = 1;
-                    for (int j = 0; j < 3; j++) //Verifica coluna ultima jogada
-                    {
-                        if (mat[j][jogadaY] != jogadorAtual)
-                        {
-                            vitoria = 0;
-                            break;
-                        }
-                    }
-                }
-                if (vitoria != 1)
-                {
-                    vitoria = 1;
-                    for (int i = 0; i < 3; i++) //Verifica coluna ultima jogada
-                    {
-                        if (mat[i][i] != jogadorAtual)
-                        {
-                            vitoria = 0;
-                            break;
-                        }
-                    }
-                }
-                if (vitoria != 1)
-                {
-                    vitoria = 1;
-                    for (int i = 0; i < 3; i++) //Verifica coluna ultima jogada
-                    {
-                        if (mat[i][2 - i] != jogadorAtual)
-                        {
-                            vitoria = 0;
-                            break;
-                        }
-                    }
-                }
                 system("cls");
 
                 printf("Jogo Atual:\n\n");
@@ -117,9 +96,10 @@ int main()
                 printf("-----------------\n");
                 printf("  %c  |  %c  |  %c\n", mat[2][0], mat[2][1], mat[2][2]);
 
-                if (vitoria == 1)
+                if (vitlinha == 1 || vitcoluna == 1 || vitdiag1 == 1 || vitdiag2 == 1)
                 {
                     printf("\nVitoria do Jogador %c!\n", jogadorAtual);
+                    vitoria = 1;
                     if (jogadorAtual == 'X')
                         vitX++;
                     else
