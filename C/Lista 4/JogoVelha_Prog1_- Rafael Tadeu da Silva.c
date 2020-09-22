@@ -21,7 +21,7 @@ int main()
         case 1:
             /* novo jogo */
             system("cls");
-            char mat[3][4] = {"   ", "   ", "   "};
+            char mat[3][3] = {"   ", "   ", "   "};
             int vitoria = 0;
             int erro;
             char jogadorAtual = 'X';
