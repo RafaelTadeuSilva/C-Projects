@@ -10,6 +10,11 @@ begin
  	CalcPerimetro:= 2*(rect.base+rect.altura);
 end;
 
+function CalcArea(rect:TRect) : real;
+begin
+ 	CalcArea:= rect.base*rect.altura;
+end;
+
 var 
 	rect : TRect;
 
@@ -19,5 +24,6 @@ Begin
 	write('Digitar a altura: ');
 	readln(rect.altura);
 	
-	write('Perimetro do Retangulo: ',CalcPerimetro(rect):0:2);
+	writeln('Perimetro do Retangulo: ',CalcPerimetro(rect):0:2);
+	write('Area do Retangulo: ',CalcArea(rect):0:2);
 End.
