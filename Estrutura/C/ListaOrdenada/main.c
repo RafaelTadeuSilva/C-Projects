@@ -113,21 +113,22 @@ void buscarChave(int x, TipoLista *Lista){
     printf("\nItem encontrado!");
   }
 void printPause(){
-  printf("\nTecle enter para continuar...\n");
+  printf("\n\nTecle enter para continuar...\n");
   fpurge(stdin);
   getchar();
   system("clear");
 }
 
 int imprimeMenu(){
+  system("clear");
+
   int opcao;
   printf("====================Menu=======================");
-  printf("\n|| Digite 1 para Inicializar a Lista        ||");
-  printf("\n|| Digite 2 para inserir uma chave.         ||");
-  printf("\n|| Digite 3 para retirar uma chave.         ||");
-  printf("\n|| Digite 4 para buscar uma chave           ||");
-  printf("\n|| Digite 5 para exibir a lista.            ||");
-  printf("\n|| Digite 6 para finalizar o programa.      ||");
+  printf("\n|| Digite 1 para inserir uma chave.         ||");
+  printf("\n|| Digite 2 para retirar uma chave.         ||");
+  printf("\n|| Digite 3 para buscar uma chave           ||");
+  printf("\n|| Digite 4 para exibir a lista.            ||");
+  printf("\n|| Digite 5 para finalizar o programa.      ||");
   printf("\n=============================================");
   printf("\nDigite sua opção: ");
   scanf("%d", &opcao);
@@ -145,24 +146,17 @@ int main(void) {
   do{
     opcao = imprimeMenu();
     switch (opcao){
-      case 1:
-        FLVazia(&lista);
-        printf("Lista inicializada!");
-
-        printPause();
-      break;
-      case 2:
+     case 1:
         printf("Digite a chave: ");
 
         scanf("%d", &chave);
         item.Chave = chave;
 
         Insere(item, &lista);
-        printf("\nNovo item incluido com sucesso\n");
         printPause();
         break;
 
-      case 3:
+      case 2:
         printf("Digite a chave que deseja remover: ");
         scanf("%d", &chave);
         retira(chave, &lista, &item);
@@ -170,7 +164,7 @@ int main(void) {
         printPause();
         break;
 
-      case 4:
+      case 3:
         printf("Digite a chave que deseja buscar: ");
         scanf("%d", &chave);
         buscarChave(chave, &lista);
@@ -178,14 +172,14 @@ int main(void) {
 
         break;
 
-      case 5:
+      case 4:
         printf("Lista Atual\n");
         imprimeLista(lista);
         printPause();
 
         break;
     }
-  }while (opcao != 6);
+  }while (opcao != 5);
   
   printf("\nFim do programa");
 
