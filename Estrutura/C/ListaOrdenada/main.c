@@ -1,3 +1,5 @@
+//Fabio 
+//Rafael Tadeu da Silva
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -119,19 +121,27 @@ void printPause(){
   system("clear");
 }
 
+void verificaOpcaoInvalida(int opcao){
+  if(opcao <0 || opcao >5){
+    printf("\nOpcao Invalida.");
+    printPause();
+  }
+}
+
 int imprimeMenu(){
   system("clear");
 
   int opcao;
-  printf("====================Menu=======================");
-  printf("\n|| Digite 1 para inserir uma chave.         ||");
-  printf("\n|| Digite 2 para retirar uma chave.         ||");
-  printf("\n|| Digite 3 para buscar uma chave           ||");
-  printf("\n|| Digite 4 para exibir a lista.            ||");
-  printf("\n|| Digite 5 para finalizar o programa.      ||");
-  printf("\n=============================================");
-  printf("\nDigite sua opção: ");
+  printf("┌────────────────────Menu─────────────────┐");
+  printf("\n|    1 - Inserir uma nova chave.          |");
+  printf("\n|    2 - Retirar uma chave da lista.      |");
+  printf("\n|    3 - Buscar uma chave na lista.       |");
+  printf("\n|    4 - Exibir a lista.                  |");
+  printf("\n|    5 - Finalizar o programa.            |");
+  printf("\n└─────────────────────────────────────────┘");
+  printf("\nDigite sua opcao: ");
   scanf("%d", &opcao);
+  verificaOpcaoInvalida(opcao);
   return opcao;
 }
 

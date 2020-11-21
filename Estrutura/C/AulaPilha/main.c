@@ -57,3 +57,47 @@ void Desempilha(TipoPilha *Pilha, TipoItem *item){
         Pilha->Tamanho--;
     }   
 }
+
+int Tamanho(TipoPilha Pilha){
+    return (Pilha.Tamanho);
+}
+
+void Imprime(TipoPilha *Pilha){
+    TipoItem item;
+    while (!Vazia(*Pilha))
+    {
+        Desempilha(Pilha, &item);
+        printf("\nChave: %d", item.Chave);
+    }
+    
+}
+
+void Menu(){
+    printf("\n-----Menu------");
+    printf("\n 1-Empilha");
+    printf("\n 2-Desempilha");
+    printf("\n 3-Exibir Pilha");
+    printf("\n 0-Sair");
+    printf("\n--------------");
+
+    printf("\n Digite a opcao");
+
+
+}
+
+int main(){
+    TipoPilha p;
+    TipoItem item;
+    int opcao = -1;
+    char continua='n';
+    FPVazia(&p);
+
+    system("cls");
+
+    while (opcao !=0)
+    {
+        printf("\nDigite a chave q deseja empilhar")
+    }
+    
+    return 0;
+}
