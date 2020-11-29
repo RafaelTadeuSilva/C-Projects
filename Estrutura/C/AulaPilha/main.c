@@ -96,7 +96,8 @@ int main(){
 
     while (opcao !=0)
     {
-        printf("\nDigite a chave q deseja empilhar")
+        printf("\nDigite a chave q deseja empilhar");
+        
     }
     
     return 0;

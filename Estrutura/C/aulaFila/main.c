@@ -34,6 +34,7 @@ int Vazia(TipoFila Fila){
 void Enfileira(TipoItem x, TipoFila *Fila){
     Fila->Tras->Prox = NOVA_CELULA();
     Fila->Tras = Fila->Tras->Prox;
+    Fila->Tras->Item=x;
     Fila->Tras->Prox = NULL;
     printf("\nChave enfileirada com sucesso!");
 }
@@ -74,17 +75,50 @@ void Menu()
     printf("\n Digite a opcao desejada: ");
 }
 
+void printPause(){
+    printf("\nTecle ENTER para continuar...");
+    fpurge(stdin);
+    getchar();
+    system("clear");
+}
+
 int main()
 {
     TipoFila f;
     TipoItem item;
     int opcao;
     FFVazia(&f);
-    system("cls");
+    system("clear");
     do
     {
+        Menu();
+        scanf("%d", &opcao);
+        switch (opcao)
+        {
+        case 1:
+            printf("\nDigite a chave q deseja enfileirar: ");
+            scanf("%d", &item.Chave);
+            Enfileira(item, &f);
+            printPause();
+            break;
+        case 2:
+            Desenfileira(&f, &item);
+            printf("\nChave %d desenfileirada: ", item.Chave);
+            printPause();
+            break;
+
+        case 3:
+            Imprime(f);
+            printPause();
+            break;
+
+        default:
+            break;
+        }
+        // printf("\nDigite a chave q deseja enfileirar:");
+        // scanf("%d");
         
-    } while (opcao == 0);
+    } while (opcao != 0);
     
     return 0;
 }
