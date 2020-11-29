@@ -116,7 +116,7 @@ void buscarChave(int x, TipoLista *Lista){
   }
 void printPause(){
   printf("\n\nTecle enter para continuar...\n");
-  fpurge(stdin);
+  fflush(stdin);
   getchar();
   system("clear");
 }
