@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "Aluguel.h"
+#include "biblioteca.h"
 
 void imprimeMenu(){
     printf("--------Menu Principal-----------");
@@ -16,6 +13,11 @@ void imprimeMenu(){
 
 int main()
 {
+    FILE *fCliente;
+    FILE *fAluguel;
+    FILE *fCarro;
+    FILE *fMarca;
+
     struct Cliente clientes[10];
     struct Aluguel alugueis[10];
     struct Carro carros[10];
@@ -27,21 +29,30 @@ int main()
     int contMarcas = 0;
 
     int opcao = 0;
+
     do
     {
+        system("clear");
         imprimeMenu();
         scanf("%d",&opcao);
         switch (opcao)
         {
         case 1:
-            opcoesCliente(clientes, &contClientes);
+            opcoesCliente(clientes, &contClientes, fCliente);
             break;
         case 2:
-            opcoesMarca(marcas, &contMarcas);   
+            opcoesMarca(marcas, &contMarcas, fMarca);
+            break;
+        case 3:
+            opcoesCarro(carros, &contCarros, marcas, contMarcas, fCarro);  
+            break;
+        case 4:
+            opcoesAluguel(alugueis, &contAlugueis, clientes, contClientes, carros, contCarros, fAluguel);  
+            break;
         default:
             break;
         }
     } while (opcao != 0);
-    
+    printf("Fim da Execucao!");
     return 0;
 }

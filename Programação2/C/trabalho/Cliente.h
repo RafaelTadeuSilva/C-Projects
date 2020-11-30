@@ -1,6 +1,6 @@
 struct Cliente
 {
-    int cpf;
+    long int cpf;
     char nome[30];
     char endereco[40];
 };
@@ -8,7 +8,7 @@ struct Cliente
 //Funcao para mostrar dados de um cliente específico
 void imprimeDetalhesCliente(struct Cliente cliente)
 {
-    printf("\nCPF: %d\nNome: %s\nEndereco: %s\n", cliente.cpf, cliente.nome, cliente.endereco);
+    printf("\nCPF: %ld\nNome: %s\nEndereco: %s\n", cliente.cpf, cliente.nome, cliente.endereco);
 };
 
 //Funcao para listar todos os clientes cadastrados
@@ -16,7 +16,7 @@ void listaClientes(struct Cliente *clientes, int tamanho)
 {
 
     if (tamanho == 0)
-        printf("\nLista de Marcas Vazia!");
+        printf("\nLista de Clientes Vazia!");
     else
         for (int i = 0; i < tamanho; i++)
         {
@@ -27,34 +27,40 @@ void listaClientes(struct Cliente *clientes, int tamanho)
 //Solicita dados para criação de um novo Cliente
 void cadastraCliente(struct Cliente *clientes, int *tamanho)
 {
-    printf("Digite o cpf: ");
-    scanf("%d", &clientes[*tamanho].cpf);
+    printf("Digite o CPF: ");
+    scanf("%ld", &clientes[*tamanho].cpf);
     printf("Digite o nome: ");
     scanf("%s", clientes[*tamanho].nome);
     printf("Digite o endereco residencial: ");
-    scanf("%s", clientes[*tamanho].endereco);
-    (*tamanho)++;
+    scanf("%s", clientes[*tamanho].endereco);    
 }
 
 //Solicita o CPF para efetuar a busca de um cliente e imprime seus dados
 //retorna o indice do cliente encontrado ou -1 se não encontrar
-int buscaClienteCPF(struct Cliente *clientes, int tamanho)
+int buscaClienteCPF(struct Cliente *clientes, int tamanho, long int cpf)
 {
-    int cpf = 0;
-    printf("Digite o CPF do Cliente: ");
-    scanf("%d", &cpf);
+    if(cpf ==-1){
+        printf("Digite o CPF do Cliente: ");
+        scanf("%ld", &cpf);
+    }
     for (int i = 0; i < tamanho; i++)
     {
         if (clientes[i].cpf == cpf)
         {
-            imprimeDetalhesCliente(clientes[i]);
+            // imprimeDetalhesCliente(clientes[i]);
             return i;
         }
     }
-    printf("\nCliente nao encontrado!\n");
+    // printf("\nCliente nao encontrado!\n");
     return -1;
 }
 
+void gravarClienteArquivo(FILE *fp, struct Cliente cliente){
+    // fprintf(fp, "%ld", cliente.cpf);
+    fprintf(fp, "%s", cliente.nome);
+    fprintf(fp, "%s", cliente.endereco);
+    printf("Cliente gravado com Sucesso!");
+}
 // //Funcao para mudar endereco do cliente
 // void mudaEndereco(struct Cliente *cliente)
 // {
@@ -68,7 +74,8 @@ int buscaClienteCPF(struct Cliente *clientes, int tamanho)
 //Mostra Opções que o usuário pode escolher
 void imprimeMenuCliente()
 {
-    printf("--------Menu Clientes-----------");
+    system("clear");
+    printf("----------Menu Clientes----------");
     printf("\n|  1 - Cadastrar Novo Cliente   |");
     printf("\n|  2 - Buscar Cliente por CPF   |");
     // printf("\n|  3 - Alterar Endereco         |");
@@ -79,14 +86,16 @@ void imprimeMenuCliente()
 }
 
 //Funcao para gerenciar opção escolhida
-void opcoesCliente(struct Cliente *clientes, int *tamanho)
+void opcoesCliente(struct Cliente *clientes, int *tamanho, FILE *fp)
 {
     int opcao = 0;
-
+    int index = 0;
+    abrirArquivo(fp, "/Users/Rafael/Faculdade/C-Projects/Programação2/C/trabalho/clientes.txt");
     //Mostra o Menu, espera a entrada da opção
     //até que seja digitado 0 para voltar ao Menu Principal
     do
     {
+        system("clear");
         imprimeMenuCliente();
         scanf("%d", &opcao);
 
@@ -94,9 +103,15 @@ void opcoesCliente(struct Cliente *clientes, int *tamanho)
         {
         case 1:
             cadastraCliente(clientes, tamanho);
+            gravarClienteArquivo(fp, clientes[*tamanho]);
+            (*tamanho)++;
             break;
         case 2:
-            buscaClienteCPF(clientes, *tamanho);
+            index = buscaClienteCPF(clientes, *tamanho, -1);
+            if(index == -1)
+                printf("\nCliente não encontrado!");
+            else
+                imprimeDetalhesCliente(clientes[index]);
             break;
         // case 3:
         //     mudaEndereco(clientes);
@@ -107,6 +122,10 @@ void opcoesCliente(struct Cliente *clientes, int *tamanho)
         default:
             break;
         }
-
+        //Pausa o programa até o usuário teclar enter
+        //Não mostra se a opção escolhida foi 0 - Voltar 
+        if(opcao!=0){
+            imprimePause();
+        }
     } while (opcao != 0);
 }

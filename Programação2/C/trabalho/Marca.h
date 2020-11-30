@@ -32,22 +32,23 @@ void cadastraMarca(struct Marca *marcas, int *tamanho)
     (*tamanho)++;
 }
 
-//Solicita o CPF para efetuar a busca de um cliente e imprime seus dados
+//Solicita o Nome para efetuar a busca de um cliente e imprime seus dados
 //retorna o indice do cliente encontrado ou -1 se não encontrar
-int buscaMarcaNome(struct Marca *marcas, int tamanho)
-{
-    char nome[20];
-    printf("Digite o nome da Marca: ");
-    scanf("%s", nome);
+int buscaMarcaNome(struct Marca *marcas, int tamanho, char marca[20])
+{   char nome[20];
+    if(strcmp(marca,"")==0){
+        printf("Digite o nome da Marca: ");
+        scanf("%s", nome);
+    }
+    else
+        strcpy(nome, marca);
     for (int i = 0; i < tamanho; i++)
     {
-        if (strcmp(marcas[i].nome, nome)==0)
+        if (strcasecmp(marcas[i].nome, nome)==0)
         {
-            imprimeDetalhesMarca(marcas[i]);
             return i;
         }
     }
-    printf("\nMarca nao encontrada!\n");
     return -1;
 }
 
@@ -64,25 +65,27 @@ int buscaMarcaNome(struct Marca *marcas, int tamanho)
 //Mostra Opções que o usuário pode escolher
 void imprimeMenuMarca()
 {
+    system("clear");
     printf("-----------Menu Marcas-----------");
     printf("\n|  1 - Cadastrar Nova Marca     |");
     printf("\n|  2 - Buscar Marca por Nome    |");
     // printf("\n|  3 - Alterar Endereco         |");
-    printf("\n|  4 - Listar Todas as Marcas    |");
-    printf("\n|  0 - Voltar                    |");
+    printf("\n|  4 - Listar Todas as Marcas   |");
+    printf("\n|  0 - Voltar                   |");
     printf("\n---------------------------------");
     printf("\nDigite sua opcao: ");
 }
 
 //Funcao para gerenciar opção escolhida
-void opcoesMarca(struct Marca *marcas, int *tamanho)
+void opcoesMarca(struct Marca *marcas, int *tamanho, FILE *fp)
 {
     int opcao = 0;
-
+    int index = 0;
     //Mostra o Menu, espera a entrada da opção
     //até que seja digitado 0 para voltar ao Menu Principal
     do
     {
+        system("clear");
         imprimeMenuMarca();
         scanf("%d", &opcao);
 
@@ -92,7 +95,12 @@ void opcoesMarca(struct Marca *marcas, int *tamanho)
             cadastraMarca(marcas, tamanho);
             break;
         case 2:
-            buscaMarcaNome(marcas, *tamanho);
+            index = buscaMarcaNome(marcas, *tamanho, "");
+            if(index == -1)
+                printf("\nMarca não encontrada!");
+            else
+                imprimeDetalhesMarca(marcas[index]);
+
             break;
         // case 3:
         //     mudaValDiaria(marcas);
@@ -103,6 +111,10 @@ void opcoesMarca(struct Marca *marcas, int *tamanho)
         default:
             break;
         }
-
+        //Pausa o programa até o usuário teclar enter
+        //Não mostra se a opção escolhida foi 0 - Voltar 
+        if(opcao!=0){
+            imprimePause();
+        }
     } while (opcao != 0);
 }
