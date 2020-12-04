@@ -29,14 +29,15 @@ void cadastraMarca(struct Marca *marcas, int *tamanho)
     scanf("%s", marcas[*tamanho].nome);
     printf("Digite o valor da diaria: ");
     scanf("%f", &marcas[*tamanho].valDiaria);
-    (*tamanho)++;
 }
 
-//Solicita o Nome para efetuar a busca de um cliente e imprime seus dados
-//retorna o indice do cliente encontrado ou -1 se não encontrar
+//Solicita o Nome para efetuar a busca de uma marca e imprime seus dados
+//retorna o indice da marca encontrado ou -1 se não encontrar
 int buscaMarcaNome(struct Marca *marcas, int tamanho, char marca[20])
-{   char nome[20];
-    if(strcmp(marca,"")==0){
+{
+    char nome[20];
+    if (strcmp(marca, "") == 0)
+    {
         printf("Digite o nome da Marca: ");
         scanf("%s", nome);
     }
@@ -44,7 +45,7 @@ int buscaMarcaNome(struct Marca *marcas, int tamanho, char marca[20])
         strcpy(nome, marca);
     for (int i = 0; i < tamanho; i++)
     {
-        if (strcasecmp(marcas[i].nome, nome)==0)
+        if (strcasecmp(marcas[i].nome, nome) == 0)
         {
             return i;
         }
@@ -76,8 +77,21 @@ void imprimeMenuMarca()
     printf("\nDigite sua opcao: ");
 }
 
+void gravarMarcaArquivo(struct Marca marca)
+{
+    FILE *fp = abrirArquivo("marcas.txt");
+
+    if (fp != NULL)
+    {
+        fprintf(fp, "%s\n", marca.nome);
+        fprintf(fp, "%.2f\n\n", marca.valDiaria);
+        printf("Marca gravada com Sucesso!");
+        fclose(fp);
+    }
+}
+
 //Funcao para gerenciar opção escolhida
-void opcoesMarca(struct Marca *marcas, int *tamanho, FILE *fp)
+void opcoesMarca(struct Marca *marcas, int *tamanho)
 {
     int opcao = 0;
     int index = 0;
@@ -93,10 +107,12 @@ void opcoesMarca(struct Marca *marcas, int *tamanho, FILE *fp)
         {
         case 1:
             cadastraMarca(marcas, tamanho);
+            gravarMarcaArquivo(marcas[*tamanho]);
+            (*tamanho)++;
             break;
         case 2:
             index = buscaMarcaNome(marcas, *tamanho, "");
-            if(index == -1)
+            if (index == -1)
                 printf("\nMarca não encontrada!");
             else
                 imprimeDetalhesMarca(marcas[index]);
@@ -112,8 +128,9 @@ void opcoesMarca(struct Marca *marcas, int *tamanho, FILE *fp)
             break;
         }
         //Pausa o programa até o usuário teclar enter
-        //Não mostra se a opção escolhida foi 0 - Voltar 
-        if(opcao!=0){
+        //Não mostra se a opção escolhida foi 0 - Voltar
+        if (opcao != 0)
+        {
             imprimePause();
         }
     } while (opcao != 0);

@@ -13,15 +13,10 @@ void imprimeMenu(){
 
 int main()
 {
-    FILE *fCliente;
-    FILE *fAluguel;
-    FILE *fCarro;
-    FILE *fMarca;
-
-    struct Cliente clientes[10];
-    struct Aluguel alugueis[10];
-    struct Carro carros[10];
-    struct Marca marcas[10];
+    struct Cliente clientes[30];
+    struct Aluguel alugueis[30];
+    struct Carro carros[30];
+    struct Marca marcas[30];
 
     int contClientes = 0;
     int contAlugueis = 0;
@@ -38,16 +33,16 @@ int main()
         switch (opcao)
         {
         case 1:
-            opcoesCliente(clientes, &contClientes, fCliente);
+            opcoesCliente(clientes, &contClientes);
             break;
         case 2:
-            opcoesMarca(marcas, &contMarcas, fMarca);
+            opcoesMarca(marcas, &contMarcas);
             break;
         case 3:
-            opcoesCarro(carros, &contCarros, marcas, contMarcas, fCarro);  
+            opcoesCarro(carros, &contCarros, marcas, contMarcas);  
             break;
         case 4:
-            opcoesAluguel(alugueis, &contAlugueis, clientes, contClientes, carros, contCarros, fAluguel);  
+            opcoesAluguel(alugueis, &contAlugueis, clientes, contClientes, carros, contCarros);  
             break;
         default:
             break;

@@ -55,11 +55,17 @@ int buscaClienteCPF(struct Cliente *clientes, int tamanho, long int cpf)
     return -1;
 }
 
-void gravarClienteArquivo(FILE *fp, struct Cliente cliente){
-    // fprintf(fp, "%ld", cliente.cpf);
-    fprintf(fp, "%s", cliente.nome);
-    fprintf(fp, "%s", cliente.endereco);
-    printf("Cliente gravado com Sucesso!");
+void gravarClienteArquivo(struct Cliente cliente){
+    FILE *fp = abrirArquivo("clientes.txt");
+
+    if(fp!=NULL)
+    {
+        fprintf(fp, "%ld\n", cliente.cpf);
+        fprintf(fp, "%s\n", cliente.nome);
+        fprintf(fp, "%s\n\n", cliente.endereco);
+        printf("Cliente gravado com Sucesso!");
+        fclose(fp);
+    }
 }
 // //Funcao para mudar endereco do cliente
 // void mudaEndereco(struct Cliente *cliente)
@@ -86,11 +92,13 @@ void imprimeMenuCliente()
 }
 
 //Funcao para gerenciar opção escolhida
-void opcoesCliente(struct Cliente *clientes, int *tamanho, FILE *fp)
+void opcoesCliente(struct Cliente *clientes, int *tamanho)
 {
     int opcao = 0;
     int index = 0;
-    abrirArquivo(fp, "/Users/Rafael/Faculdade/C-Projects/Programação2/C/trabalho/clientes.txt");
+    // abrirArquivo(fp, "/Users/Rafael/Faculdade/C-Projects/Programação2/C/trabalho/clientes.txt");
+    // printf("%d", fprintf(fp, "%s", "teste2"));
+
     //Mostra o Menu, espera a entrada da opção
     //até que seja digitado 0 para voltar ao Menu Principal
     do
@@ -103,7 +111,7 @@ void opcoesCliente(struct Cliente *clientes, int *tamanho, FILE *fp)
         {
         case 1:
             cadastraCliente(clientes, tamanho);
-            gravarClienteArquivo(fp, clientes[*tamanho]);
+            gravarClienteArquivo(clientes[*tamanho]);
             (*tamanho)++;
             break;
         case 2:

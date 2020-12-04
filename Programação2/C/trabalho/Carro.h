@@ -2,6 +2,7 @@
 
 struct Carro
 {
+    char placa[8];
     struct Marca marca;
     int ano;
     char cor[20];
@@ -13,7 +14,7 @@ struct Carro
 //Funcao para mostrar dados de um carro específico
 void imprimeDetalhesCarro(struct Carro carro)
 {
-    printf("\nMarca: %s\nAno: %d\nCor: %s\nKM Atual: %d\nEsta Alugado: %s\nValor por Diaria: %.2f\nValor por KM rodado: %.2f\n", carro.marca.nome, carro.ano, carro.cor, carro.kmAtual, carro.estaAlugado == 0 ? "Nao" : "Sim", carro.marca.valDiaria, carro.valorKm);
+    printf("\nPlaca: %s\nMarca: %s\nAno: %d\nCor: %s\nKM Atual: %d\nEsta Alugado: %s\nValor por Diaria: %.2f\nValor por KM rodado: %.2f\n", carro.placa, carro.marca.nome, carro.ano, carro.cor, carro.kmAtual, carro.estaAlugado == 0 ? "Nao" : "Sim", carro.marca.valDiaria, carro.valorKm);
 };
 
 //Funcao para listar todos os carros cadastrados
@@ -28,15 +29,82 @@ void listaCarros(struct Carro *carros, int tamanho)
         }
 }
 
-//Solicita dados para criação de um novo Carro
-void cadastraCarro(struct Carro *carros, int *tamanho, struct Marca *marcas, int tamMarcas)
+int verificaCarrosDisponiveis(struct Carro *carros, int tamanho, int imprimeDetalhes)
 {
+    int numDisponiveis = 0;
+    for (int i = 0; i < tamanho; i++)
+    {
+        if (carros[i].estaAlugado == 0)
+        {
+            if (imprimeDetalhes == 1)
+                imprimeDetalhesCarro(carros[i]);
+            numDisponiveis++;
+        }
+    }
+    return numDisponiveis;
+}
+
+void gravarCarroArquivo(struct Carro carro)
+{
+    FILE *fp = abrirArquivo("carros.txt");
+
+    if (fp != NULL)
+    {
+        fprintf(fp, "%s\n", carro.placa);
+        fprintf(fp, "%s\n", carro.marca.nome);
+        fprintf(fp, "%d\n", carro.ano);
+        fprintf(fp, "%s\n", carro.cor);
+        fprintf(fp, "%d\n", carro.kmAtual);
+        fprintf(fp, "%.2f\n\n", carro.valorKm);
+
+        printf("Carro gravado com Sucesso!");
+        fclose(fp);
+    }
+}
+
+//Solicita o indice para imprimir seus dados
+int buscaCarroPlaca(struct Carro *carros, int tamanho, char *busca)
+{
+    char placa[8];
+    if (strcmp(busca, "") == 0)
+    {
+        printf("Digite a Placa do Carro: ");
+        scanf("%s", placa);
+    }
+    else
+        strcpy(placa, busca);
+    int index = 0;
+    for (int i = 0; i < tamanho; i++)
+    {
+        if (strcasecmp(carros[i].placa, placa) == 0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+//Solicita dados para criação de um novo Carro
+int cadastraCarro(struct Carro *carros, int *tamanho, struct Marca *marcas, int tamMarcas)
+{
+    int result = 0;
+    char placa[8];
     char marca[20];
     int marcaIndex = -1;
     if (tamMarcas == 0)
         printf("\nCadastre uma Marca antes de cadastrar um Carro!\n");
     else
     {
+        do
+        {
+            printf("\nInforme a Placa do Carro:");
+            scanf("%s", placa);
+            if (buscaCarroPlaca(carros, *tamanho, placa) == -1)
+                strcpy(carros[*tamanho].placa, placa);
+            else
+                printf("\nJá existe um carro cadastrado com esta placa!\n");
+        } while (strcmp(carros[*tamanho].placa, "") == 0);
+
         do
         {
             printf("\nInforme o nome da Marca do carro (-1 para listar marcas): ");
@@ -62,23 +130,9 @@ void cadastraCarro(struct Carro *carros, int *tamanho, struct Marca *marcas, int
         printf("Digite o Valor por KM Rodado: ");
         scanf("%f", &carros[*tamanho].valorKm);
         carros[*tamanho].estaAlugado = 0;
-        (*tamanho)++;
+        result = 1;
     }
-}
-
-//Solicita o indice para imprimir seus dados
-int buscaCarroCodigo(struct Carro *carros, int tamanho)
-{
-    int index = 0;
-    printf("Digite o Codigo do Carro: ");
-    scanf("%d", &index);
-    if (index < 0 || index > tamanho - 1)
-    {
-        printf("Valor fora do intervalo!");
-        return -1;
-    }
-    imprimeDetalhesCarro(carros[index]);
-    return index;
+    return result;
 }
 
 // //Funcao para mudar endereco do carro
@@ -98,7 +152,7 @@ void imprimeMenuCarro()
 
     printf("-----------Menu Carros-----------");
     printf("\n|  1 - Cadastrar Novo Carro      |");
-    printf("\n|  2 - Buscar Carro por Codigo   |");
+    printf("\n|  2 - Buscar Carro por Placa    |");
     // printf("\n|  3 - Alterar Endereco         |");
     printf("\n|  4 - Listar Todos os Carros    |");
     printf("\n|  0 - Voltar                    |");
@@ -107,10 +161,10 @@ void imprimeMenuCarro()
 }
 
 //Funcao para gerenciar opção escolhida
-void opcoesCarro(struct Carro *carros, int *tamanho, struct Marca *marcas, int tamMarcas, FILE *fp)
+void opcoesCarro(struct Carro *carros, int *tamanho, struct Marca *marcas, int tamMarcas)
 {
     int opcao = 0;
-
+    int index = 0;
     //Mostra o Menu, espera a entrada da opção
     //até que seja digitado 0 para voltar ao Menu Principal
     do
@@ -122,10 +176,18 @@ void opcoesCarro(struct Carro *carros, int *tamanho, struct Marca *marcas, int t
         switch (opcao)
         {
         case 1:
-            cadastraCarro(carros, tamanho, marcas, tamMarcas);
+            if (cadastraCarro(carros, tamanho, marcas, tamMarcas) == 1)
+            {
+                gravarCarroArquivo(carros[*tamanho]);
+                (*tamanho)++;
+            }
             break;
         case 2:
-            buscaCarroCodigo(carros, *tamanho);
+            index = buscaCarroPlaca(carros, *tamanho, "");
+            if (index == -1)
+                printf("\nPlaca não encontrada!");
+            else
+                imprimeDetalhesCarro(carros[index]);
             break;
         // case 3:
         //     mudaEndereco(carros);
@@ -137,8 +199,9 @@ void opcoesCarro(struct Carro *carros, int *tamanho, struct Marca *marcas, int t
             break;
         }
         //Pausa o programa até o usuário teclar enter
-        //Não mostra se a opção escolhida foi 0 - Voltar 
-        if(opcao!=0){
+        //Não mostra se a opção escolhida foi 0 - Voltar
+        if (opcao != 0)
+        {
             imprimePause();
         }
     } while (opcao != 0);
