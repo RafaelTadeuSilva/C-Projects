@@ -153,7 +153,7 @@ int cadastraCarro(struct Carro *carros, int tamanho, struct Marca *marcas, int t
 //Mostra Opções que o usuário pode escolher
 void imprimeMenuCarro()
 {
-    system("clear");
+    system("cls");
 
     printf("-----------Menu Carros-----------");
     printf("\n|  1 - Cadastrar Novo Carro      |");
@@ -174,7 +174,6 @@ void opcoesCarro(struct Carro *carros, int *tamanho, struct Marca *marcas, int t
     //até que seja digitado 0 para voltar ao Menu Principal
     do
     {
-        system("clear");
         imprimeMenuCarro();
         scanf("%d", &opcao);
 

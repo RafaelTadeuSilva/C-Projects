@@ -1,6 +1,8 @@
 #include "biblioteca.h"
 
 void imprimeMenu(){
+    system("cls");
+
     printf("--------Menu Principal-----------");
     printf("\n|  1 - Clientes                 |");
     printf("\n|  2 - Marcas                   |");
@@ -31,7 +33,6 @@ int main()
     //até que seja digitado 0 para finalizar o programa
     do
     {
-        system("clear");
         imprimeMenu();
         scanf("%d",&opcao);
         switch (opcao)

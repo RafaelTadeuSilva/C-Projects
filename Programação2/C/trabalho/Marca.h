@@ -49,7 +49,7 @@ int buscaMarcaNome(struct Marca *marcas, int tamanho, char nome[20])
 //Mostra Opções que o usuário pode escolher
 void imprimeMenuMarca()
 {
-    system("clear");
+    system("cls");
     printf("-----------Menu Marcas-----------");
     printf("\n|  1 - Cadastrar Nova Marca     |");
     printf("\n|  2 - Buscar Marca por Nome    |");
@@ -85,7 +85,6 @@ void opcoesMarca(struct Marca *marcas, int *tamanho)
     //até que seja digitado 0 para voltar ao Menu Principal
     do
     {
-        system("clear");
         imprimeMenuMarca();
         scanf("%d", &opcao);
 

@@ -68,7 +68,7 @@ void gravarClienteArquivo(struct Cliente cliente){
 //Mostra Opções que o usuário pode escolher
 void imprimeMenuCliente()
 {
-    system("clear");
+    system("cls");
     printf("----------Menu Clientes----------");
     printf("\n|  1 - Cadastrar Novo Cliente   |");
     printf("\n|  2 - Buscar Cliente por CPF   |");
@@ -89,7 +89,6 @@ void opcoesCliente(struct Cliente *clientes, int *tamanho)
     //até que seja digitado 0 para voltar ao Menu Principal
     do
     {
-        system("clear");
         imprimeMenuCliente();
         scanf("%d", &opcao);
 

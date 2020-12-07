@@ -14,7 +14,7 @@ struct Aluguel
 //Mostra Opções que o usuário pode escolher
 void imprimeMenuAluguel()
 {
-    system("clear");
+    system("cls");
 
     printf("------------Menu Alugueis-----------");
     printf("\n|  1 - Cadastrar Novo Aluguel      |");
@@ -216,7 +216,6 @@ void opcoesAluguel(struct Aluguel *alugueis, int *tamanho, struct Cliente *clien
     //até que seja digitado 0 para voltar ao Menu Principal
     do
     {
-        system("clear");
         imprimeMenuAluguel();
         scanf("%d", &opcao);
 
