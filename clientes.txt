@@ -1,28 +1,4 @@
-35977089864
-Rafael
-Rua
-
-556
-Beto
-Alameda
-
-359
-rafa
-rua
-
-359
-rafa
-rua
-
-359
-rafa
-iii
-
-359
-rafa
-rua
-
-359
-rafa
-rua
+CPF: 359
+Nome: rafa
+Endereço: rua
 

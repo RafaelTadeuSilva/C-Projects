@@ -1,27 +1,6 @@
-Fiat
-(null)
+Marca: fiat
+Valor diária: R$ 50.00
 
-hyundai
-20.00
-
-fia
-20.00
-
-fia
-20.00
-
-fia
-20.00
-
-fia
-20.00
-
-chev
-20.00
-
-fiat
-20.00
-
-fia
-20.00
+Marca: chev
+Valor diária: R$ 30.00
 

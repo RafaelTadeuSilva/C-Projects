@@ -9,8 +9,6 @@ FILE *abrirArquivo(char *nomeArquivo){
     if(fp==NULL)
         printf("Problemas ao abrir/criar o arquivo!");
     return fp;
-    //printf("%d", fprintf(fp, "%s", "teste"));
-    // fclose(fp);
 }
 
 FILE *carregaArquivo(char *nomeArquivo){

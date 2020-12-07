@@ -1,30 +1,18 @@
-0
-
-
+Data Aluguel: 20/10
 
+CPF do Cliente 359
+Nome do Cliente: rafa
+Placa do Carro: dsf3082
+Marca do Carro: chev
+Data Aluguel: 20/4
 
-359
-rafa
-chev
-28/10
+CPF do Cliente 359
+Nome do Cliente: rafa
+Placa do Carro: ggd0021
+Marca do Carro: fiat
+Data Aluguel: 20/9
 
-359
-rafa
-fiat
-28/10
-
-359
-rafa
-fia
-20/10
-
-359
-rafa
-fia
-11/11
-
-359
-rafa
-fia
-28/11
-
+CPF do Cliente 359
+Nome do Cliente: rafa
+Placa do Carro: dsf3082
+Marca do Carro: chev

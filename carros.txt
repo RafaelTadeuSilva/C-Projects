@@ -1,55 +1,14 @@
-hyundai
-2000
-azul
-200
-2.00
+Placa: dsf3082
+Marca: chev
+Ano fabricação: 3000
+Cor: verde
+Km Atual: 125
+Valor km rodado: R$ 2.00
 
-S�i�
-fia
-2000
-azul
-200
-2.00
-
-rua
-fia
-2000
-azul
-2000
-2.00
-
-ita
-fia
-2002
-preta
-2000
-3.00
-
-upa5555
-chev
-2000
-azul
-3000
-2.00
-
-fia2222
-fiat
-2000
-azul
-2000
-3.00
-
-fia
-fia
-2001
-azul
-2000
-2.00
-
-222
-fia
-1111
-preto
-2001
-2.50
+Placa: ggd0021
+Marca: fiat
+Ano fabricação: 1253
+Cor: preto
+Km Atual: 251
+Valor km rodado: R$ 1.00
 
