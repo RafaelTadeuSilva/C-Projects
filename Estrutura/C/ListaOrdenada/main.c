@@ -64,6 +64,11 @@ void Insere(TipoItem x, TipoLista *Lista){
   
   printf("\nChave inserida com sucesso");
 }
+void ConcatenaListas(TipoLista *Lista1, TipoLista *Lista2){
+  Lista1->Ultimo->Prox = Lista2->Primeiro->Prox;
+  Lista2->Primeiro->Prox = Lista1->Primeiro->Prox;
+  Lista2->Ultimo = Lista1->Ultimo;
+}
 
 void imprimeLista(TipoLista Lista){
   TipoApontador aux;
@@ -122,7 +127,7 @@ void printPause(){
 }
 
 void verificaOpcaoInvalida(int opcao){
-  if(opcao <0 || opcao >5){
+  if(opcao <0 || opcao >10){
     printf("\nOpcao Invalida.");
     printPause();
   }
@@ -148,8 +153,11 @@ int imprimeMenu(){
 int main(void) {
   int opcao;
   TipoItem item;
-  TipoLista lista;
-  FLVazia(&lista);
+  TipoLista lista1;
+  TipoLista lista2;
+
+  FLVazia(&lista1);
+  FLVazia(&lista2);
 
   int chave;
   
@@ -162,14 +170,14 @@ int main(void) {
         scanf("%d", &chave);
         item.Chave = chave;
 
-        Insere(item, &lista);
+        Insere(item, &lista1);
         printPause();
         break;
 
       case 2:
         printf("Digite a chave que deseja remover: ");
         scanf("%d", &chave);
-        retira(chave, &lista, &item);
+        retira(chave, &lista1, &item);
         
         printPause();
         break;
@@ -177,19 +185,58 @@ int main(void) {
       case 3:
         printf("Digite a chave que deseja buscar: ");
         scanf("%d", &chave);
-        buscarChave(chave, &lista);
+        buscarChave(chave, &lista1);
         printPause();
 
         break;
 
       case 4:
         printf("Lista Atual\n");
-        imprimeLista(lista);
+        imprimeLista(lista1);
+        printPause();
+
+        break;
+
+        case 5:
+        printf("Digite a chave: ");
+
+        scanf("%d", &chave);
+        item.Chave = chave;
+
+        Insere(item, &lista2);
+        printPause();
+        break;
+
+      case 6:
+        printf("Digite a chave que deseja remover: ");
+        scanf("%d", &chave);
+        retira(chave, &lista2, &item);
+        
+        printPause();
+        break;
+
+      case 7:
+        printf("Digite a chave que deseja buscar: ");
+        scanf("%d", &chave);
+        buscarChave(chave, &lista2);
+        printPause();
+
+        break;
+
+      case 8:
+        printf("Lista Atual\n");
+        imprimeLista(lista2);
+        printPause();
+
+        break;
+        case 9:
+        printf("Lista Atual\n");
+        ConcatenaListas(&lista1, &lista2);
         printPause();
 
         break;
     }
-  }while (opcao != 5);
+  }while (opcao != 10);
   
   printf("\nFim do programa");
 
